@@ -1,0 +1,23 @@
+Java 8 Features
+
+https://www.oracle.com/java/technologies/javase/8-whats-new.html
+https://reflectoring.io/java-release-notes
+https://www.digitalocean.com/community/tutorials/java-8-features-with-examples
+https://www.tutorialspoint.com/java8/java8_overview.htm
+
+
+1. Lambda Expression(Functional Interfaces and Lambda Expressions)
+2. Stream API
+3. forEach() method in Iterable interface
+3. Optional
+4. Java Date and Time APIs
+3. Method Reference
+4. Default Methods(default and static methods in Interfaces)
+5. Type Annotation
+6. Repeating Annotations
+7. Method Parameter Reflection
+8. Concurrency API improvements
+Java IO improvements
+Collection API improvements
+Nashorn, JavaScript Engine − A Java-based engine to execute JavaScript code
+
