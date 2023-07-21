@@ -45,6 +45,9 @@ public class Java8Stream {
         doAnyMatch();
         doAllMatch();
         doDistinct();
+        doLimit();
+        doParallelStream();
+        doMax();
 
     }
 
@@ -245,6 +248,43 @@ public class Java8Stream {
         });
 
         System.out.println("doDistinct done!");
+    }
+
+    static void doLimit() {
+        System.out.println("doDistinct...");
+
+        users.stream().limit(3).forEach(user -> {
+            System.out.println("user: " + user.toString());
+        });
+
+        System.out.println("doDistinct done!");
+    }
+
+    static void doParallelStream() {
+        System.out.println("doParallelStream...");
+
+        users.parallelStream().forEach(user -> {
+            System.out.println("user: " + user.toString());
+        });
+
+        System.out.println("doParallelStream done!");
+    }
+
+    static void doMax() {
+        System.out.println("doParallelStream...");
+
+        Optional<User> maxUser = users.stream().max(new Comparator<User>() {
+            @Override
+            public int compare(User u1, User u2) {
+                return u1.getFirstName().compareTo(u2.getFirstName());
+            }
+        });
+
+        maxUser.ifPresent(user -> {
+            System.out.println("Max User: " + user.toString());
+        });
+
+        System.out.println("doParallelStream done!");
     }
 
 }
