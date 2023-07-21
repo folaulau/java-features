@@ -48,6 +48,7 @@ public class Java8Stream {
         doLimit();
         doParallelStream();
         doMax();
+        doMin();
 
     }
 
@@ -140,7 +141,7 @@ public class Java8Stream {
     }
 
     /***
-     * he Stream API provides the sorted() method, which is used to sort the elements of a stream based on a specified
+     * The Stream API provides the sorted() method, which is used to sort the elements of a stream based on a specified
      * comparator or the natural ordering of the elements. The sorted() method returns a new stream with the elements
      * sorted according to the specified criteria.
      * 
@@ -270,8 +271,18 @@ public class Java8Stream {
         System.out.println("doParallelStream done!");
     }
 
+    /***
+     * Stream API provides the max() method, which is used to find the maximum element of a stream based on a given
+     * comparator or the natural order of the elements.
+     * 
+     * The max() method returns an Optional<T> that contains the maximum element, or an empty Optional if the stream is
+     * empty.
+     * 
+     * Optional<T> max(Comparator<? super T> comparator)
+     * 
+     */
     static void doMax() {
-        System.out.println("doParallelStream...");
+        System.out.println("doMax...");
 
         Optional<User> maxUser = users.stream().max(new Comparator<User>() {
             @Override
@@ -284,7 +295,34 @@ public class Java8Stream {
             System.out.println("Max User: " + user.toString());
         });
 
-        System.out.println("doParallelStream done!");
+        System.out.println("doMax done!");
+    }
+
+    /***
+     * Stream API provides the min() method, which is used to find the minimum element of a stream based on a given
+     * comparator or the natural order of the elements.
+     * 
+     * The min() method returns an Optional<T> that contains the minimum element, or an empty Optional if the stream is
+     * empty.
+     * 
+     * Optional<T> min(Comparator<? super T> comparator)
+     * 
+     */
+    static void doMin() {
+        System.out.println("doMin...");
+
+        Optional<User> maxUser = users.stream().min(new Comparator<User>() {
+            @Override
+            public int compare(User u1, User u2) {
+                return u1.getFirstName().compareTo(u2.getFirstName());
+            }
+        });
+
+        maxUser.ifPresent(user -> {
+            System.out.println("Min User: " + user.toString());
+        });
+
+        System.out.println("doMin done!");
     }
 
 }
