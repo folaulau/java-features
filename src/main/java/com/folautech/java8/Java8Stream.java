@@ -2,7 +2,9 @@ package com.folautech.java8;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import com.folautech.java.Student;
@@ -17,7 +19,7 @@ public class Java8Stream {
     static Faker      faker         = new Faker();
 
     static {
-        for (long i = 0; i < numberOfUsers; i++) {
+        for (long i = 1; i <= numberOfUsers; i++) {
             String firstName = faker.name().firstName();
             String lastName = faker.name().lastName();
             String email = (firstName + lastName).toLowerCase() + "@gmail.com";
@@ -40,6 +42,9 @@ public class Java8Stream {
         doCount();
         doForEach();
         doFindFirst();
+        doAnyMatch();
+        doAllMatch();
+        doDistinct();
 
     }
 
@@ -78,11 +83,10 @@ public class Java8Stream {
 
         System.out.println("doMap...");
 
-        // filter on id that is greater than 3.
-
         List<Student> mappedStudents = users.stream().map(user -> {
 
             // @formatter:off
+            // map user to student
             return Student.builder()
                         .id(user.getId())
                         .firstName(user.getFirstName())
@@ -115,12 +119,11 @@ public class Java8Stream {
     static void doFlatMap() {
         System.out.println("doFlatMap...");
 
-        // filter on id that is greater than 3.
-
         List<List<Integer>> listOfLists = Arrays.asList(Arrays.asList(1, 2, 3), Arrays.asList(4, 5, 6), Arrays.asList(7, 8, 9));
 
         // @formatter:off
         // flatten a stream of streams into a single stream
+        // flatmap function must return a stream
         List<Integer> flattenedList = listOfLists.stream()
                 .flatMap(list -> list.stream())
                 .collect(Collectors.toList());
@@ -133,20 +136,115 @@ public class Java8Stream {
         System.out.println("doFlatMap done!");
     }
 
+    /***
+     * he Stream API provides the sorted() method, which is used to sort the elements of a stream based on a specified
+     * comparator or the natural ordering of the elements. The sorted() method returns a new stream with the elements
+     * sorted according to the specified criteria.
+     * 
+     * Stream<T> sorted()
+     * 
+     * Stream<T> sorted(Comparator<? super T> comparator)
+     * 
+     */
     static void doSort() {
+        System.out.println("doSort...");
 
+        List<User> sortedUsers = users.stream()
+        // @formatter:off
+                .sorted(new Comparator<User>() {
+                    @Override
+                    public int compare(User u1, User u2) {
+                        return u1.getFirstName().compareTo(u2.getFirstName());
+                    }
+                })
+//                .sorted(Comparator.comparingLong(User::getId))
+                // @formatter:on
+                .collect(Collectors.toList());
+
+        sortedUsers.forEach(user -> {
+            System.out.println("user: " + user.toString());
+        });
+
+        System.out.println("doSort done!");
     }
 
     static void doCount() {
 
+        System.out.println("doCount...");
+
+        long count = users.stream().count();
+
+        System.out.println("count: " + count);
+
+        System.out.println("doCount done!");
     }
 
     static void doForEach() {
+        System.out.println("doForEach...");
 
+        users.forEach(user -> {
+            System.out.println("user: " + user.toString());
+        });
+
+        System.out.println("doForEach done!");
     }
 
     static void doFindFirst() {
+        System.out.println("doFindFirst...");
 
+        Optional<User> optUser = users.stream().findFirst();
+
+        optUser.ifPresent(user -> {
+            System.out.println("user: " + user.toString());
+        });
+
+        System.out.println("doFindFirst done!");
+    }
+
+    /***
+     * Stream API provides the anyMatch() method, which is used to check if any element in the stream satisfies a given
+     * condition or predicate.
+     * 
+     * It returns a boolean value indicating whether at least one element in the stream matches the specified condition.
+     */
+    static void doAnyMatch() {
+        System.out.println("doAnyMatch...");
+
+        boolean anyMatch = users.stream().anyMatch(user -> user.getFirstName().contains("mine"));
+
+        System.out.println("anyMatch: " + anyMatch);
+
+        System.out.println("doAnyMatch done!");
+    }
+
+    /***
+     * Stream API provides the allMatch() method, which is used to check if all elements in the stream satisfy a given
+     * condition or predicate.
+     * 
+     * It returns a boolean value indicating whether every element in the stream matches the specified condition.
+     */
+    static void doAllMatch() {
+        System.out.println("doAllMatch...");
+
+        boolean allMatch = users.stream().allMatch(user -> user.getFirstName().contains("a"));
+        System.out.println("allMatch" + allMatch);
+
+        System.out.println("doAllMatch done!");
+    }
+
+    /***
+     * Stream API provides the distinct() method, which is used to remove duplicate elements from a stream. It returns a
+     * new stream containing only the distinct elements based on their natural order (if available) or their
+     * implementation of equals() method.
+     */
+    static void doDistinct() {
+        System.out.println("doDistinct...");
+
+        users.stream().distinct().forEach(user -> {
+            System.out.println("user: " + user.toString());
+        });
+
+        System.out.println("doDistinct done!");
     }
 
 }
