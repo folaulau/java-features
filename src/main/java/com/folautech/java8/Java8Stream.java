@@ -325,4 +325,26 @@ public class Java8Stream {
         System.out.println("doMin done!");
     }
 
+    /***
+     * the Stream API provides the reduce() method, which is used to perform a reduction operation on the elements of a
+     * stream. A reduction operation combines the elements of a stream into a single result.
+     * 
+     * The reduce() method allows you to compute the result of a binary operation iteratively, starting with an initial
+     * value (also known as the identity) and applying the operation to the elements in the stream.
+     * 
+     * Optional<T> reduce(BinaryOperator<T> accumulator)
+     * 
+     * T reduce(T identity, BinaryOperator<T> accumulator)
+     */
+    static void doReduce() {
+        System.out.println("doReduce...");
+        List<Integer> numbers = Arrays.asList(3, 1, 4, 1, 5, 9, 2, 6);
+        // Finding the maximum number using reduce with an identity
+        int maxNumber = numbers.stream().reduce(Integer.MIN_VALUE, (a, b) -> Integer.max(a, b));
+
+        System.out.println("Max Number: " + maxNumber);
+
+        System.out.println("doReduce done!");
+    }
+
 }
