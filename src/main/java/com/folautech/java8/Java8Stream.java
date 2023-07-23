@@ -49,6 +49,7 @@ public class Java8Stream {
         doParallelStream();
         doMax();
         doMin();
+        doReduce();
 
     }
 
@@ -326,7 +327,7 @@ public class Java8Stream {
     }
 
     /***
-     * the Stream API provides the reduce() method, which is used to perform a reduction operation on the elements of a
+     * The Stream API provides the reduce() method, which is used to perform a reduction operation on the elements of a
      * stream. A reduction operation combines the elements of a stream into a single result.
      * 
      * The reduce() method allows you to compute the result of a binary operation iteratively, starting with an initial
