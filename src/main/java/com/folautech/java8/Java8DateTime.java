@@ -1,9 +1,12 @@
 package com.folautech.java8;
 
+import java.time.Duration;
+import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.OffsetDateTime;
+import java.time.Period;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 
@@ -22,6 +25,10 @@ public class Java8DateTime {
         doLocalTime();
 
         doZonedDateTime();
+
+        doDuration();
+
+        doPeriod();
 
     }
 
@@ -168,6 +175,101 @@ public class Java8DateTime {
         }
 
         System.out.println("doZonedDateTime done!");
+    }
+
+    /***
+     * Duration is a class in the java.time package that represents a time-based duration. It measures the amount of
+     * time between two points in time in terms of hours, minutes, seconds, and nanoseconds. Duration is primarily used
+     * to represent a duration between two instances of Instant, but it can also be used with LocalTime, LocalDateTime,
+     * or any other time-based object that supports nanosecond precision.
+     */
+    static void doDuration() {
+        System.out.println("doDuration...");
+        // Create a Duration between two Instants
+        Instant start = Instant.now();
+        // Simulate some operation
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        Instant end = Instant.now();
+
+        Duration duration = Duration.between(start, end);
+        System.out.println("Duration in seconds: " + duration.getSeconds());
+        System.out.println("Duration in milliseconds: " + duration.toMillis());
+
+        // Add and subtract duration
+        Duration fiveMinutes = Duration.ofMinutes(5);
+        Instant futureInstant = end.plus(fiveMinutes);
+        Instant pastInstant = start.minus(fiveMinutes);
+        System.out.println("Future Instant: " + futureInstant);
+        System.out.println("Past Instant: " + pastInstant);
+
+        // Compare durations
+        Duration oneMinute = Duration.ofMinutes(1);
+        Duration twoMinutes = Duration.ofMinutes(2);
+        if (oneMinute.compareTo(twoMinutes) < 0) {
+            System.out.println("One minute is less than two minutes.");
+        } else if (oneMinute.compareTo(twoMinutes) > 0) {
+            System.out.println("One minute is greater than two minutes.");
+        } else {
+            System.out.println("One minute is equal to two minutes.");
+        }
+
+        // Check if a duration is zero or negative
+        Duration zeroDuration = Duration.ZERO;
+        Duration negativeDuration = Duration.ofSeconds(-10);
+        System.out.println("Is zero duration? " + zeroDuration.isZero());
+        System.out.println("Is negative duration? " + negativeDuration.isNegative());
+
+        System.out.println("doDuration done!");
+    }
+
+    /***
+     * Period is a class in the java.time package that represents a date-based period between two dates. It measures the
+     * difference between two LocalDate instances in terms of years, months, and days. Period is useful when you need to
+     * deal with date-based durations, such as calculating the difference between two dates, representing a period of
+     * time, or adding/subtracting time units to a date.
+     */
+    static void doPeriod() {
+        System.out.println("doPeriod...");
+        // Create a Period between two LocalDates
+        LocalDate startDate = LocalDate.of(2023, 7, 1);
+        LocalDate endDate = LocalDate.of(2023, 12, 31);
+
+        Period period = Period.between(startDate, endDate);
+        System.out.println("Period: " + period);
+        System.out.println("Years: " + period.getYears());
+        System.out.println("Months: " + period.getMonths());
+        System.out.println("Days: " + period.getDays());
+
+        // Add and subtract periods
+        Period threeMonths = Period.ofMonths(3);
+        LocalDate futureDate = endDate.plus(threeMonths);
+        LocalDate pastDate = startDate.minus(threeMonths);
+        System.out.println("Future Date: " + futureDate);
+        System.out.println("Past Date: " + pastDate);
+
+        // // Compare periods
+        // Period oneYear = Period.ofYears(1);
+        // Period twoYears = Period.ofYears(2);
+        // if (oneYear.compareTo(twoYears) < 0) {
+        // System.out.println("One year is less than two years.");
+        // } else if (oneYear.compareTo(twoYears) > 0) {
+        // System.out.println("One year is greater than two years.");
+        // } else {
+        // System.out.println("One year is equal to two years.");
+        // }
+
+        // Check if a period is zero or negative
+        Period zeroPeriod = Period.ZERO;
+        Period negativePeriod = Period.ofYears(-1);
+
+        System.out.println("Is zero period? " + zeroPeriod.isZero());
+        System.out.println("Is negative period? " + negativePeriod.isNegative());
+
+        System.out.println("doPeriod done!");
     }
 
 }
