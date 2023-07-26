@@ -1,0 +1,36 @@
+Java 9 Features
+
+Java Platform Module System (JPMS):
+
+JPMS was the highlight of Java 9. It aimed to modularize the Java platform and allow developers to create modular applications.
+It introduced the concept of "modules" to encapsulate packages, leading to better encapsulation, security, and performance.
+JLink (The Java Linker):
+
+With the introduction of modules, Java also introduced jlink, which can be used to assemble and optimize a set of modules and their dependencies into a custom runtime image.
+JShell:
+
+Java 9 introduced a REPL (Read-Eval-Print-Loop) tool called JShell, which allows developers to execute and test any Java code snippet interactively.
+Improved Javadoc:
+
+Javadoc was enhanced to produce HTML5 output.
+It now includes a search box to search for classes or members.
+Javadoc documentation can now include information about which module defines each element.
+Private Interface Methods:
+
+Before Java 9, interface methods could be either public static or public abstract. Java 9 introduced private interface methods to help split lengthy default methods in interfaces.
+Collection Factory Methods:
+
+Introduced concise ways to create instances of collections and maps with small numbers of elements. For instance, List.of(), Set.of(), and Map.of().
+Stream API Enhancements:
+
+New methods like takeWhile(), dropWhile(), and ofNullable() were added.
+The Stream.iterate() method was enhanced.
+Improved Optional Class:
+
+New methods such as ifPresentOrElse() and stream() were added to the Optional class.
+Enhanced Deprecation:
+
+The @Deprecated annotation has been enhanced to provide more information about the status and intended disposition of the API.
+Enhanced Process API:
+
+Java 9 introduced improvements in the Process API which help to control and manage operating system processes.
