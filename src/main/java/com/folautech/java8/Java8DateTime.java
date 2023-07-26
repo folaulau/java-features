@@ -182,10 +182,12 @@ public class Java8DateTime {
     }
 
     /***
-     * Duration is a class in the java.time package that represents a time-based duration. It measures the amount of
-     * time between two points in time in terms of hours, minutes, seconds, and nanoseconds. Duration is primarily used
-     * to represent a duration between two instances of Instant, but it can also be used with LocalTime, LocalDateTime,
-     * or any other time-based object that supports nanosecond precision.
+     * Duration is a class in the java.time package that represents a time-based duration.
+     * 
+     * It measures the amount of time between two points in time in terms of hours, minutes, seconds, and nanoseconds.
+     * 
+     * Duration is primarily used to represent a duration between two instances of Instant, but it can also be used with
+     * LocalTime, LocalDateTime, or any other time-based object that supports nanosecond precision.
      */
     static void doDuration() {
         System.out.println("doDuration...");
@@ -231,10 +233,12 @@ public class Java8DateTime {
     }
 
     /***
-     * Period is a class in the java.time package that represents a date-based period between two dates. It measures the
-     * difference between two LocalDate instances in terms of years, months, and days. Period is useful when you need to
-     * deal with date-based durations, such as calculating the difference between two dates, representing a period of
-     * time, or adding/subtracting time units to a date.
+     * Period is a class in the java.time package that represents a date-based period between two dates.
+     * 
+     * It measures the difference between two LocalDate instances in terms of years, months, and days.
+     * 
+     * Period is useful when you need to deal with date-based durations, such as calculating the difference between two
+     * dates, representing a period of time, or adding/subtracting time units to a date.
      */
     static void doPeriod() {
         System.out.println("doPeriod...");
@@ -328,7 +332,7 @@ public class Java8DateTime {
         System.out.println("Parsed Date Time: " + parsedDateTime);
 
         // Create a LocalDateTime
-        LocalDateTime localDateTime = LocalDateTime.of(2023, 7, 20, 12, 34, 56);
+        LocalDateTime localDateTime = LocalDateTime.now();
 
         // Convert LocalDateTime to OffsetDateTime with UTC offset (+00:00)
         OffsetDateTime offsetDateTime = localDateTime.atOffset(ZoneOffset.UTC);
