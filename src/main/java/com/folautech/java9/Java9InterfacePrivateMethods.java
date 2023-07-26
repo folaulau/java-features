@@ -115,6 +115,13 @@ interface UserOperations {
      * cohesive approach to design interfaces and evolve them without breaking existing implementations.
      */
     static int calculateAgeDiff(User a, User b) {
+        commonLogic();
         return Period.between(a.getDob(), b.getDob()).getYears();
     }
+
+    // you can have private static method in interface.
+    private static void commonLogic() {
+        System.out.println("Common logic executed");
+    }
+
 }
