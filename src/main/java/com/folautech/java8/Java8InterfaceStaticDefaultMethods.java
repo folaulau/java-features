@@ -30,6 +30,9 @@ public class Java8InterfaceStaticDefaultMethods {
         System.out.println("result: " + result);
 
         User a = User.builder().dob(LocalDate.now().minusYears(18)).build();
+
+        userOperationsImpl.save(a);
+
         User b = User.builder().dob(LocalDate.now().minusYears(8)).build();
 
         int yearsDiff = UserOperations.calculateAgeDiff(a, b);
@@ -54,9 +57,21 @@ class UserOperationsImpl implements UserOperations {
         }
         return false;
     }
+
+    /**
+     * This is an abstract method which is required to be overriden and implemented.
+     */
+    @Override
+    public void save(User user) {
+        System.out.println("Saving user...");
+        System.out.println(user.toString());
+        System.out.println("User saved!");
+    }
 }
 
 interface UserOperations {
+
+    void save(User user);
 
     /**
      * Before Java 8, interfaces could only have abstract methods. The introduction of default methods in interfaces
