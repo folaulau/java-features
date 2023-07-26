@@ -2,19 +2,36 @@ package com.folautech.java8;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Comparator;
 import java.util.List;
-import java.util.Optional;
 import java.util.function.Supplier;
-import java.util.stream.Collectors;
-
-import com.folautech.java.Student;
 import com.folautech.java.User;
 import com.github.javafaker.Faker;
 
+/***
+ * Java method references are a shorthand notation of a lambda expression to call a method. They became available in
+ * Java 8, just like lambdas and streams. Method references allow for a cleaner and more readable way to refer to
+ * methods without executing them.
+ *
+ */
 public class Java8MethodReference {
 
-    static Faker faker = new Faker();
+    static List<User> users         = new ArrayList<>();
+    static int        numberOfUsers = 20;
+
+    static Faker      faker         = new Faker();
+
+    static {
+        for (long i = 1; i <= numberOfUsers; i++) {
+            String firstName = faker.name().firstName();
+            String lastName = faker.name().lastName();
+            String email = (firstName + lastName).toLowerCase() + "@gmail.com";
+
+            User user = User.builder().id(i).firstName(firstName).lastName(lastName).email(email).phoneNumber(faker.phoneNumber().cellPhone()).build();
+            System.out.println("User: " + user.toString());
+            users.add(user);
+        }
+
+    }
 
     public static void main(String[] args) {
         // TODO Auto-generated method stub
@@ -45,6 +62,9 @@ public class Java8MethodReference {
 
         // Using method reference
         Arrays.asList("apple", "banana", "orange").forEach(Java8MethodReference::convertToUpperCase);
+
+        // using static method to print out
+        users.forEach(System.out::println);
 
         System.out.println("staticMethodReference done!");
     }
@@ -90,7 +110,6 @@ public class Java8MethodReference {
      * you want to pass a constructor as an argument to a functional interface or use it in lambda expressions.
      * 
      * ClassName::new
-     * 
      */
     static void constructorMethodReference() {
         System.out.println("\nconstructorMethodReference...");
@@ -103,7 +122,7 @@ public class Java8MethodReference {
         // Using method reference
         Supplier<User> personMethodRef = User::new;
         User johnFromMethodRef = personMethodRef.get();
-        System.out.println("Person from method reference: " + johnFromMethodRef);
+        System.out.println("User from method reference: " + johnFromMethodRef);
 
         System.out.println("constructorMethodReference done!");
     }

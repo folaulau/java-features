@@ -1,6 +1,7 @@
 package com.folautech.java;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -19,4 +20,5 @@ public class User implements Serializable {
     private String            lastName;
     private String            email;
     private String            phoneNumber;
+    private LocalDate         dob;
 }
