@@ -10,14 +10,14 @@ public class Java12Switch {
 
     public static void main(String[] args) {
 
-        runSwitch();
+        runNewSwitchSyntax();
     }
 
     /**
      * 
      */
-    static void runSwitch() {
-        System.out.println("runSwitch...");
+    static void runNewSwitchSyntax() {
+        System.out.println("runNewSwitchSyntax...");
 
         DayOfWeek dayOfWeek = DayOfWeek.WEDNESDAY;
 
@@ -48,7 +48,7 @@ public class Java12Switch {
 
         System.out.println("number: " + number + ", message: " + message);
 
-        System.out.println("runSwitch done!");
+        System.out.println("runNewSwitchSyntax done!");
     }
 
 }
