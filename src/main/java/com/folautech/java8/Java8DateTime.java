@@ -8,7 +8,9 @@ import java.time.LocalTime;
 import java.time.OffsetDateTime;
 import java.time.Period;
 import java.time.ZoneId;
+import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 
 import com.github.javafaker.Faker;
 
@@ -29,6 +31,8 @@ public class Java8DateTime {
         doDuration();
 
         doPeriod();
+
+        doDateTimeFormatter();
 
     }
 
@@ -270,6 +274,73 @@ public class Java8DateTime {
         System.out.println("Is negative period? " + negativePeriod.isNegative());
 
         System.out.println("doPeriod done!");
+    }
+
+    /**
+     * DateTimeFormatter is a class in the java.time.format package that provides the functionality to format and parse
+     * date and time objects in a specific pattern. It allows you to convert dates and times to text representation
+     * (formatting) and parse text into date and time objects (parsing). DateTimeFormatter is part of the Java 8 Date
+     * and Time API (java.time package) and is used to customize the presentation of date and time values according to a
+     * desired pattern.
+     * 
+     * Key points about DateTimeFormatter:
+     * 
+     * DateTimeFormatter is immutable and thread-safe, so you can share a single instance across multiple threads.
+     * 
+     * It provides a wide range of pre-defined format styles, such as ISO_DATE, ISO_TIME, ISO_DATE_TIME, etc.
+     * 
+     * You can create a custom date and time format pattern using specific format symbols. For example, "yyyy-MM-dd"
+     * represents a year, a hyphen, a month, another hyphen, and a day.
+     * 
+     * You can use DateTimeFormatter.ofPattern(String pattern) to create a formatter with a custom pattern.
+     * 
+     * DateTimeFormatter supports localized formatting and parsing for different locales.
+     * 
+     * 
+     */
+    static void doDateTimeFormatter() {
+        System.out.println("doDateTimeFormatter...");
+        // Formatting dates and times using pre-defined styles
+        LocalDate currentDate = LocalDate.now();
+        LocalTime currentTime = LocalTime.now();
+        LocalDateTime currentDateTime = LocalDateTime.now();
+
+        // Formatting using pre-defined styles
+        System.out.println("ISO Date: " + currentDate.format(DateTimeFormatter.ISO_DATE));
+        System.out.println("ISO Time: " + currentTime.format(DateTimeFormatter.ISO_TIME));
+        System.out.println("ISO Date Time: " + currentDateTime.format(DateTimeFormatter.ISO_DATE_TIME));
+
+        // Formatting using custom patterns
+        DateTimeFormatter customDateFormatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+        System.out.println("Custom Date: " + currentDate.format(customDateFormatter));
+
+        DateTimeFormatter customDateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        System.out.println("Custom Date Time: " + currentDateTime.format(customDateTimeFormatter));
+
+        // Parsing text into date and time objects
+        String dateString = "2023-07-20";
+        String dateTimeString = "2023-07-20 12:34:56";
+
+        LocalDate parsedDate = LocalDate.parse(dateString, DateTimeFormatter.ISO_DATE);
+        LocalDateTime parsedDateTime = LocalDateTime.parse(dateTimeString, customDateTimeFormatter);
+
+        System.out.println("Parsed Date: " + parsedDate);
+        System.out.println("Parsed Date Time: " + parsedDateTime);
+
+        // Create a LocalDateTime
+        LocalDateTime localDateTime = LocalDateTime.of(2023, 7, 20, 12, 34, 56);
+
+        // Convert LocalDateTime to OffsetDateTime with UTC offset (+00:00)
+        OffsetDateTime offsetDateTime = localDateTime.atOffset(ZoneOffset.UTC);
+
+        // Format OffsetDateTime to UTC format (yyyy-MM-dd'T'HH:mm:ss.SSS'Z')
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+        String formattedUTC = offsetDateTime.format(formatter);
+
+        System.out.println("LocalDateTime: " + localDateTime);
+        System.out.println("Formatted UTC: " + formattedUTC);
+
+        System.out.println("doDateTimeFormatter done!");
     }
 
 }
