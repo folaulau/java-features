@@ -2,6 +2,8 @@ package com.folautech.java8;
 
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 
 import com.github.javafaker.Faker;
 
@@ -21,11 +23,13 @@ public class Java8CompletableFuture {
     public static void main(String[] args) {
         System.out.println("Java8CompletableFuture");
 
-        // runAsync();
-        //
-        // runSupplyAsync();
+        runAsync();
+
+        runSupplyAsync();
 
         runSupplyAsyncThen();
+
+        runWithCustomExecutor();
 
     }
 
@@ -129,6 +133,29 @@ public class Java8CompletableFuture {
         future.join();
 
         System.out.println("runAsync done!");
+
+    }
+
+    static void runWithCustomExecutor() {
+        System.out.println("runWithCustomExecutor...");
+
+        Executor executor = Executors.newFixedThreadPool(2);
+
+        CompletableFuture<Void> future = CompletableFuture.runAsync(() -> {
+            // Simulate some long-running task
+            try {
+                System.out.println("runAsync sleeping...");
+                Thread.sleep(1500);
+                System.out.println("runAsync done sleeping!");
+            } catch (InterruptedException e) {
+                throw new IllegalStateException(e);
+            }
+        }, executor);
+
+        // This will block until the future is completed (i.e., the Runnable has executed)
+        future.join();
+
+        System.out.println("runWithCustomExecutor done!");
 
     }
 
