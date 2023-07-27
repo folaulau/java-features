@@ -4,6 +4,23 @@ import java.util.Random;
 
 import com.github.javafaker.Faker;
 
+/**
+ * Introduced as a preview feature in Java 13 and then standardized in Java 15, Text Blocks aim to simplify the task of
+ * writing and managing multi-line string literals in Java. They are particularly useful when working with JSON, SQL,
+ * XML, or any other multi-line textual data.
+ * 
+ * Basics of Text Blocks:
+ * 
+ * A text block is denoted by three double-quote marks (""") and allows for multi-line strings without the need for most
+ * escape sequences.
+ * 
+ * All white spaces and new lines within a text block are preserved. If you want to remove the newline at the end of a
+ * line, you can use the line continuation character (\)
+ * 
+ * Within a text block, you can use the standard escape sequences like \n, \t, and \". However, you no longer need to
+ * escape every double-quote in the string, only the sequence of three double-quotes (""") if they appear in the
+ * content:
+ */
 public class Java13TextBlocks {
 
     static Faker faker = new Faker();
