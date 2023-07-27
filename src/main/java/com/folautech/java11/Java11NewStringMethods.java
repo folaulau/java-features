@@ -51,9 +51,16 @@ public class Java11NewStringMethods {
      * This method returns a stream of lines extracted from the string, separated by line terminators.
      */
     static void runStringLines() {
-        System.out.println("runIsBlank...");
+        System.out.println("runStringLines...");
 
         String multiLineStr = "Line1\nLine2\nLine3";
+        multiLineStr.lines().forEach(System.out::println);
+        
+        multiLineStr = """
+                Line1
+                Line2
+                Line3
+                """;
         multiLineStr.lines().forEach(System.out::println);
         /*
          * Output: Line1 Line2 Line3
@@ -66,7 +73,7 @@ public class Java11NewStringMethods {
      * This method returns a string whose value is the concatenation of this string repeated the given number of times.
      */
     static void runStringRepeat() {
-        System.out.println("runIsBlank...");
+        System.out.println("runStringRepeat...");
         String str = "abc";
         System.out.println(str.repeat(3)); // abcabcabc
 

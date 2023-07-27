@@ -24,12 +24,12 @@ public class Java8CompletableFuture {
         System.out.println("Java8CompletableFuture");
 
         runAsync();
+//
+//        runSupplyAsync();
 
-        runSupplyAsync();
-
-        runSupplyAsyncThen();
-
-        runWithCustomExecutor();
+ //       runSupplyAsyncThen();
+//
+//        runWithCustomExecutor();
 
     }
 
